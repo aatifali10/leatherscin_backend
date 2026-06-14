@@ -1,15 +1,16 @@
 import express from "express";
-import cors from "cors"
-import mongoose from "mongoose"
+import cors from "cors";
+import authRouter from "./routes/authRoute.js";
 
-const app= express();
-const port =5000;
+
+
+
+const app = express();
+
+app.use(cors());
 
 app.use(express.json());
-app.use(cors())
 
-mongoose.connect("mongodb://localhost:27017/leatherscin").then(()=>console.log("mongodb connected successfully")).catch((err)=>console.log("db error",err))
+app.use("/api/auth", authRouter);
 
-app.listen(port,()=>{
-    console.log(`http:localhost:${port}`)
-})
+export default app
